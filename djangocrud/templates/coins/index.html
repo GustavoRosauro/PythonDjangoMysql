@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" class="post-form" action="inserir">
+     {% csrf_token %}
+    <div class="container">
+        <div class="col-md-5">
+        <label>Nome</label>
+        <input class="form-control" name="nome">
+        <label>Preço</label>
+        <input class="form-control" name="preco">
+        <label>Data</label>
+        <input class="form-control" type="date" name="dt_criacao">
+    </div>
+        </div>
+    <button type="submit" class="btn btn-success">Salvar</button>
+</form>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Data</th>
+    </tr>
+    </thead>
+    {%for moeda in moedas%}
+    <tbody>
+        <tr>
+            <td>{{moeda.nome}}</td>
+            <td>{{moeda.preco}}</td>
+            <td>{{moeda.dt_criacao}}</td>
+            <td><a href="deletar/{{moeda.id}}" class="btn btn-danger">Excluir</a></td>
+        </tr>
+    </tbody>
+    {%endfor%}
+</table>
+</body>
+</html>
