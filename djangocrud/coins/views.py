@@ -15,7 +15,7 @@ def index(request):
 
 
 def inserir(request):
-    print(str(request));
+    print(str(request))
     if request.method == "POST":
         form = MoedaForm(request.POST)
         if form.is_valid():
@@ -33,4 +33,19 @@ def inserir(request):
 def deletar(request, id):
     moeda = Moeda.objects.get(id=id)
     moeda.delete()
+    return redirect("/coins")
+
+
+def edit(request, id):
+    moeda = Moeda.objects.get(id=id)
+    return render(request, "coins/index.html",
+                  {'moeda': moeda})
+
+
+def update(request, id):
+    moeda = Moeda.objects.get(id=id)
+    form = MoedaForm(request.POST, instance=moeda)
+    if form.is_valid():
+        form.save()
+        return redirect("/coins")
     return redirect("/coins")

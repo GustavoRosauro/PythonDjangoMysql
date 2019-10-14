@@ -6,16 +6,20 @@
     <title>Title</title>
 </head>
 <body>
+{% if moeda.id == null %}
 <form method="POST" class="post-form" action="inserir">
+    {% else %}
+    <form method="POST" class="post-form" action="../update/{{moeda.id}}">
+        {% endif %}
      {% csrf_token %}
     <div class="container">
         <div class="col-md-5">
         <label>Nome</label>
-        <input class="form-control" name="nome">
+        <input class="form-control" name="nome" value="{{moeda.nome}}">
         <label>Preço</label>
-        <input class="form-control" name="preco">
+        <input class="form-control" name="preco" value="{{moeda.preco}}">
         <label>Data</label>
-        <input class="form-control" type="date" name="dt_criacao">
+        <input class="form-control" type="date" name="dt_criacao" value="{{moeda.dt_criacao}}">
     </div>
         </div>
     <button type="submit" class="btn btn-success">Salvar</button>
@@ -35,6 +39,7 @@
             <td>{{moeda.preco}}</td>
             <td>{{moeda.dt_criacao}}</td>
             <td><a href="deletar/{{moeda.id}}" class="btn btn-danger">Excluir</a></td>
+            <td><a href="edit/{{moeda.id}}" class="btn btn-warning">Editar</a></td>
         </tr>
     </tbody>
     {%endfor%}
